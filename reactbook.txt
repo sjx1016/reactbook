@@ -1,0 +1,19 @@
+curl https://unpkg.com/react@17/umd/react.development.js > ./reactbook/react/react.js
+curl https://unpkg.com/react-dom@17/umd/react-dom.development.js > ./reactbook/react/react-dom.js
+
+Windows環境のPowerShellを使うコマンド：
+Setup react:
+	Invoke-WebRequest -Uri "https://unpkg.com/react@17/umd/react.development.js" -OutFile "./reactbook/react/react.js"
+Setup react-dom:
+	Invoke-WebRequest -Uri "https://unpkg.com/react-dom@17/umd/react-dom.development.js" -OutFile "./reactbook/react/react-dom.js"
+Setup Babel:(get a local copy of Babel)
+	Invoke-WebRequest -Uri "https://unpkg.com/babel-standalone/babel.min.js" -OutFile "./reactbook/react/babel.js"
+
+
+all the code from this book
+	https://github.com/stoyan/reactbook2
+
+JSX:JSX とは、JavaScript の拡張版で、ウェブアプリケーションの開発に使われるプログラミング言語
+	https://facebook.github.io/jsx
+
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello React</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="00.normal.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- my app renders here -->
+    </div>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="react/babel.js"></script>
+    <!-- script type="text/babel" -->
+    <script type="text/babel">
+      const MyComponent01 = function () {
+        return <span>I am so custom 01</span>;
+      };
+
+      const MyComponent03 = function ({name, job, favorite}) {
+        return (
+          <span>
+            My name is <em>{name}</em> 
+            the job is <em>{job}</em>
+            and I like <em>{favorite}</em>
+          </span>
+        );
+      };
+      MyComponent03.defaultProps = {
+        job: 'engineer',
+      };
+
+      class MyComponent02 extends React.Component {
+        render() {
+          return (
+            <span>
+              My name is <em>{this.props.name}</em>, 
+              the job is <em>{this.props.job}</em>,
+              and I like <em>{this.props.favorite}</em>.
+            </span>
+            );
+        }
+      };
+      MyComponent02.defaultProps = {
+        job: 'engineer',
+      };
+      
+      class TextAreaCounter extends React.Component {
+        constructor() {
+          super();
+          this.state = {};
+          //this.onTextChange = this.onTextChange.bind(this);
+        }
+        //after the initial mounting and after the commit to the DOM
+        componentDidMount() {
+          console.log('componentDidMount...');
+        }
+        componentWillUnmount() {
+          console.log('componentWillUnmount...');
+        }
+        componentDidUpdate(prevProps, prevState, snapshot) {
+          console.log('componentDidUpdate:  ', prevProps, prevState, snapshot);
+          // restrict the number of characters to be typed in the textarea
+          //if (this.state.text.length > 3) {
+          //  this.setState({text: prevState.text || this.props.text});
+          //}
+        }
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          console.log('getSnapshotBeforeUpdate:  ', prevProps, prevState);
+          return 'hello!!!';
+        }
+        shouldComponentUpdate(newProps, newState) {
+          console.log('shouldComponentUpdate:  ', newProps, newState);
+          // restrict the number of characters to be typed in the textarea
+          //return newState.text.length > 3 ? false : true;
+          return true;
+        }
+
+        onTextChange = (event) => {
+          this.setState({
+            text: event.target.value,
+          });
+        }
+
+        render() {
+          const text = 'text' in this.state ? this.state.text : this.props.text;
+          return (
+            <div>
+              <textarea 
+                value={text}
+                onChange={this.onTextChange}
+              />
+              <h3>{text.length}</h3>
+            </div>
+          );
+        }
+      };
+      TextAreaCounter.defaultProps = {
+        text: 'count me as I type',
+      };
+
+      const myTextAreaCount = ReactDOM.render(<TextAreaCounter text="Bob" />,
+        document.getElementById('app')
+      ); 
+
+      //sets a new state
+      //myTextAreaCount.setState({text: "hello new state!"});
+
+      //gets a reference to the main parent DOM node that React Created
+      const reactAppNode = ReactDOM.findDOMNode(myTextAreaCount);
+
+    </script>
+      <!-- 
+      ReactDOM.render(<MyComponent02 name="sjx" favorite="FootBall" />,
+        document.getElementById('app')
+      ); 
+
+      ReactDOM.render(<TextAreaCounter text="sjx" />,
+        document.getElementById('app')
+      );      
+      -->
+  </body>
+</html>
